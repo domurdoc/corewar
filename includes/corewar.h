@@ -1,6 +1,8 @@
 #ifndef COREWAR_H
 # define COREWAR_H
 # include "corewar_t.h"
+# include <errno.h>
+# include <stdio.h>
 
 # define IDX_MOD			(MEM_SIZE / 8)
 
@@ -24,6 +26,30 @@
 # define MAX_CHECKS			10
 
 # define COREWAR_EXEC_MAGIC	0xEA83F3
+
+/*
+** ERRORS
+*/
+
+# define SUC_GAME_OVER		0
+# define ERR_N_PLAYERS		1
+# define ERR_N_FLAG			2
+# define ERR_DUMP_FLAG		3
+# define ERR_READ_OPEN		4
+# define ERR_READ_MAGIC		5
+# define ERR_READ_PNAME		6
+# define ERR_READ_NONE		7
+# define ERR_READ_PSIZE		8
+# define ERR_READ_COMM		9
+# define ERR_READ_PCODE		10
+# define ERR_READ_CLOSE		11
+# define ERR_MEMORY			12
+
+# define N_MSG				13
+
+/*
+** ***********
+*/
 
 # define AR					proc->ci.args
 # define CF_SET(val)		proc->cf = (val) ? 0 : 1;
@@ -64,16 +90,11 @@ int			good_size(uint8_t *buf);
 int			good_str(uint8_t *buf);
 
 /*
-** ARENA INIT ******************************************************************
+** ARENA ***********************************************************************
 */
 
 void		arena_init(void);
-
-/*
-** GAME ************************************************************************
-*/
-
-void		game_run(void);
+void		arena_run(void);
 
 /*
 ** MEMORY **********************************************************************
@@ -131,5 +152,11 @@ void		proc_zer(t_proc *proc);
 */
 
 void		dump(void);
+
+/*
+** EXIT ************************************************************************
+*/
+
+void		exit_(int code, char *str);
 
 #endif

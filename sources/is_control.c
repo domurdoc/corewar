@@ -19,7 +19,7 @@ void	fork_(t_proc *proc)
 	t_proc	*new;
 
 	if (!(new = proc_add()))
-		exit(EXIT_FAILURE);
+		exit_(ERR_MEMORY, NULL);
 	*new = *proc;
 	new->pc_adv = dst_ind(AR[0].val % IDX_MOD, new);
 	new->pc = new->pc_adv;
@@ -30,7 +30,7 @@ void	lfork(t_proc *proc)
 	t_proc	*new;
 
 	if (!(new = proc_add()))
-		exit(EXIT_FAILURE);
+		exit_(ERR_MEMORY, NULL);
 	*new = *proc;
 	new->pc_adv = dst_ind(AR[0].val, new);
 	new->pc = new->pc_adv;

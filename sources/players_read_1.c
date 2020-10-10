@@ -14,23 +14,23 @@ static void	player_read(t_player *p)
 	int	fd;
 
 	if ((fd = open(p->file_name, O_RDONLY)) < 0)
-		exit(EXIT_FAILURE);
+		exit_(ERR_READ_OPEN, p->file_name);
 	if (!field_read(fd, (uint8_t*)&p->magic, sizeof(uint32_t), good_magic))
-		exit(EXIT_FAILURE);
+		exit_(ERR_READ_MAGIC, NULL);
 	if (!field_read(fd, (uint8_t*)p->prog_name, PROG_NAME_LENGTH, good_str))
-		exit(EXIT_FAILURE);
+		exit_(ERR_READ_PNAME, NULL);
 	if (!field_read(fd, (uint8_t*)&p->magic, sizeof(uint32_t), good_none))
-		exit(EXIT_FAILURE);
+		exit_(ERR_READ_NONE, NULL);
 	if (!field_read(fd, (uint8_t*)&p->prog_size, sizeof(uint32_t), good_size))
-		exit(EXIT_FAILURE);
+		exit_(ERR_READ_PSIZE, NULL);
 	if (!field_read(fd, (uint8_t*)p->comment, COMMENT_LENGTH, good_str))
-		exit(EXIT_FAILURE);
+		exit_(ERR_READ_COMM, NULL);
 	if (!field_read(fd, (uint8_t*)&p->magic, sizeof(uint32_t), good_none))
-		exit(EXIT_FAILURE);
+		exit_(ERR_READ_NONE, NULL);
 	if (!field_read(fd, (uint8_t*)p->prog_code, p->prog_size, NULL))
-		exit(EXIT_FAILURE);
+		exit_(ERR_READ_PCODE, NULL);
 	if (close(fd))
-		exit(EXIT_FAILURE);
+		exit_(ERR_READ_CLOSE, NULL);
 }
 
 void		players_read(void)

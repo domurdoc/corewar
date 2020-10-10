@@ -16,7 +16,7 @@ static void	players_init(void)
 
 void		vm_init(void)
 {
-	ft_memset(g_os.mem, 0, MEM_SIZE);
+	(void)ft_memset(g_os.mem, 0, MEM_SIZE);
 	g_os.cycles_passed = 0;
 	g_os.ctd = CYCLE_TO_DIE;
 	g_os.cycles_to_check = CYCLE_TO_DIE;
@@ -26,6 +26,5 @@ void		vm_init(void)
 	g_os.chk_counter = 0;
 	g_os.n_players = 0;
 	players_init();
-	g_procs.cur = NULL;
-	g_procs.len = 0;
+	dlst_cir_init(&g_procs);
 }

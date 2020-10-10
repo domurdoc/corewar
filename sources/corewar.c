@@ -9,6 +9,6 @@ int	main(int ac, char **av)
 	input_parse(ac, av);
 	players_read();
 	arena_init();
-	game_run();
-	exit(EXIT_SUCCESS);
+	arena_run();
+	exit_(SUC_GAME_OVER, NULL);
 }

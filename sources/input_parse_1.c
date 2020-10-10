@@ -17,7 +17,7 @@ static void		players_arrange(char **fn, uint8_t n)
 	while (i < g_os.n_players)
 	{
 		if (!g_os.players[i++].file_name)
-			exit(EXIT_FAILURE);
+			exit_(ERR_N_FLAG, NULL);
 	}
 }
 

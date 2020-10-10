@@ -11,10 +11,11 @@ SRC_DIR = sources
 OBJ_DIR = objects
 
 SRC_NAMES = arena_init.c \
+	arena_run.c \
 	arg_dst.c \
 	arg_src.c \
 	corewar.c \
-	game_run.c \
+	exit.c \
 	input_parse_1.c \
 	input_parse_2.c \
 	instr_exec.c \

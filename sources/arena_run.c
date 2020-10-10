@@ -22,7 +22,7 @@ static void	do_procs(void)
 static void	game_over(void)
 {
 	ft_printf("%s\n", g_os.players[g_os.id - 1].prog_name);
-	exit(EXIT_SUCCESS);
+	exit_(SUC_GAME_OVER, NULL);
 }
 
 static void	check_procs(void)
@@ -63,7 +63,7 @@ static void	do_check(void)
 	}
 }
 
-void		game_run(void)
+void		arena_run(void)
 {
 	while (g_os.cycles_passed <= g_os.cycles_to_dump)
 	{
