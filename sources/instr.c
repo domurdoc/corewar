@@ -1,0 +1,37 @@
+#include "corewar.h"
+
+t_instr			g_is[16] =
+{
+	{DIR_CODE << 6, 1, {SRC | T_DIR},
+		10, 0, 1, live},
+	{0, 2, {SRC | T_DIR | T_IND, T_REG},
+		5, 0, 1, ld},
+	{0, 2, {SRC | T_REG, T_REG | T_IND},
+		5, 0, 1, st},
+	{0, 3, {SRC | T_REG, SRC | T_REG, T_REG},
+		10, 0, 1, add},
+	{0, 3, {SRC | T_REG, SRC | T_REG, T_REG},
+		10, 0, 1, sub},
+	{0, 3, {SRC | T_REG | T_DIR | T_IND, SRC | T_REG | T_DIR | T_IND, T_REG},
+		6, 0, 1, and},
+	{0, 3, {SRC | T_REG | T_DIR | T_IND, SRC | T_REG | T_DIR | T_IND, T_REG},
+		6, 0, 1, or},
+	{0, 3, {SRC | T_REG | T_DIR | T_IND, SRC | T_REG | T_DIR | T_IND, T_REG},
+		6, 0, 1, xor},
+	{DIR_CODE << 6, 1, {SRC | T_DIR},
+		20, 1, 1, zjmp},
+	{0, 3, {SRC | T_REG | T_DIR | T_IND, SRC | T_REG | T_DIR, T_REG},
+		25, 1, 1, ldi},
+	{0, 3, {SRC | T_REG, SRC | T_REG | T_DIR | T_IND, SRC | T_REG | T_DIR},
+		25, 1, 1, sti},
+	{DIR_CODE << 6, 1, {SRC | T_DIR},
+		800, 1, 1, fork_},
+	{0, 2, {SRC | T_DIR | T_IND, T_REG},
+		10, 0, 0, lld},
+	{0, 3, {SRC | T_REG | T_DIR | T_IND, SRC | T_REG | T_DIR, T_REG},
+		50, 1, 1, lldi},
+	{DIR_CODE << 6, 1, {SRC | T_DIR},
+		1000, 1, 1, lfork},
+	{0, 1, {SRC | T_REG},
+		2, 0, 1, aff}
+};
