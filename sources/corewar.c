@@ -10,5 +10,5 @@ int	main(int ac, char **av)
 	players_read();
 	arena_init();
 	arena_run();
-	exit_(SUC_GAME_OVER, NULL);
+	exit_(SUCC, NULL);
 }

@@ -8,8 +8,16 @@
 # define PROG_NAME_LENGTH	(128)
 # define COMMENT_LENGTH		(2048)
 # define MAX_PLAYERS		4
+# define BUFF_SIZE			4096
 
 typedef struct s_instr	t_instr;
+
+typedef	struct	s_buff
+{
+	char		s[BUFF_SIZE];
+	uint32_t	i;
+	uint32_t	n;
+}				t_buff;
 
 typedef struct	s_player
 {
@@ -23,6 +31,7 @@ typedef struct	s_player
 
 typedef struct	s_arg
 {
+	int32_t		raw_val;
 	int32_t		val;
 	uint32_t	idx;
 	uint8_t		code;
@@ -37,6 +46,7 @@ typedef struct	s_ci
 
 typedef struct	s_proc
 {
+	uint32_t	id;
 	uint8_t		reg[REG_NUMBER][REG_SIZE];
 	uint32_t	pc;
 	uint32_t	pc_adv;
@@ -47,6 +57,7 @@ typedef struct	s_proc
 
 struct			s_instr
 {
+	char		*name;
 	uint8_t		acb;
 	uint8_t		n_args;
 	uint8_t		types[3];
@@ -54,6 +65,7 @@ struct			s_instr
 	uint8_t		dir_16;
 	uint8_t		idx_mod;
 	void		(*exec)(t_proc*);
+	void		(*repr)(t_proc*);
 };
 
 typedef struct	s_os
@@ -68,6 +80,9 @@ typedef struct	s_os
 	uint64_t	chk_counter;
 	uint8_t		n_players;
 	t_player	players[MAX_PLAYERS];
+	uint32_t	p_ids;
+	uint8_t		verb;
+	t_buff		buff;
 }				t_os;
 
 #endif

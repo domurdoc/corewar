@@ -11,5 +11,6 @@ void	st(t_proc *proc)
 
 void	sti(t_proc *proc)
 {
-	mem_write(dst_ind((AR[1].val + AR[2].val) % IDX_MOD, proc), proc->reg[AR[0].idx], REG_SIZE);
+	mem_write(dst_ind((AR[1].val + AR[2].val) % IDX_MOD, proc),
+		proc->reg[AR[0].idx], REG_SIZE);
 }

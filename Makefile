@@ -1,5 +1,5 @@
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -g3
+FLAGS = -Wall -Wextra -Werror -g3 -O3
 
 # PROGRAM name
 
@@ -10,28 +10,37 @@ NAME = corewar
 SRC_DIR = sources
 OBJ_DIR = objects
 
-SRC_NAMES = arena_init.c \
-	arena_run.c \
-	arg_dst.c \
-	arg_src.c \
-	corewar.c \
-	exit.c \
-	input_parse_1.c \
-	input_parse_2.c \
-	instr_exec.c \
-	instr_fetch.c \
-	instr.c \
-	is_arith.c \
-	is_control.c \
-	is_mov_ld.c \
-	is_mov_st.c \
-	mem_1.c \
-	mem_2.c \
-	players_read_1.c \
-	players_read_2.c \
-	proc.c \
-	vm_init.c \
-	dump.c
+SRC_NAMES = arena_init.c\
+arena_run.c\
+arg_dst.c\
+arg_src.c\
+buff.c\
+corewar.c\
+dump.c\
+exit.c\
+input_parse_1.c\
+input_parse_2.c\
+instr_exec.c\
+instr_fetch.c\
+instr.c\
+is_arith.c\
+is_control.c\
+is_mov_ld.c\
+is_mov_st.c\
+mem_1.c\
+mem_2.c\
+players_read_1.c\
+players_read_2.c\
+proc.c\
+repr_is_arith.c\
+repr_is_control.c\
+repr_is_mov_ld.c\
+repr_is_mov_st.c\
+repr.c\
+utility.c\
+verb_1.c\
+verb_2.c\
+vm_init.c
 
 OBJ_NAMES = $(SRC_NAMES:.c=.o)
 

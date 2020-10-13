@@ -21,8 +21,10 @@ static void	do_procs(void)
 
 static void	game_over(void)
 {
-	ft_printf("%s\n", g_os.players[g_os.id - 1].prog_name);
-	exit_(SUC_GAME_OVER, NULL);
+	buff_flush();
+	ft_printf("Player %d (%s) won\n", g_os.id,
+		g_os.players[g_os.id - 1].prog_name);
+	exit_(SUCC, NULL);
 }
 
 static void	check_procs(void)
@@ -34,11 +36,13 @@ static void	check_procs(void)
 	while (i < g_procs.len)
 	{
 		proc = g_procs.cur->data;
-		if (proc->lc == 0)
+		if (g_os.cycles_passed - proc->lc >= g_os.ctd)
+		{
+			verb_check_2(proc);
 			free(dlst_cir_pop(&g_procs));
+		}
 		else
 		{
-			proc->lc = 0;
 			g_procs.cur = g_procs.cur->next;
 			i++;
 		}
@@ -51,7 +55,9 @@ static void	do_check(void)
 		game_over();
 	else if (g_os.cycles_to_check-- == 1)
 	{
+		verb_check_1();
 		check_procs();
+		verb_check_3();
 		g_os.chk_counter++;
 		if (g_os.live_counter >= NBR_LIVE || g_os.chk_counter > MAX_CHECKS)
 		{
@@ -67,9 +73,9 @@ void		arena_run(void)
 {
 	while (g_os.cycles_passed <= g_os.cycles_to_dump)
 	{
+		g_os.cycles_passed++;
 		do_procs();
 		do_check();
-		g_os.cycles_passed++;
 	}
 	dump();
 }

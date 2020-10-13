@@ -23,7 +23,7 @@ static void		players_arrange(char **fn, uint8_t n)
 
 static uint8_t	flag(char *arg)
 {
-	static char	*flags[NFLAGS] = {"-n", "-dump"};
+	static char	*flags[NFLAGS] = {"-n", "-dump", "-v"};
 	uint8_t		i;
 
 	i = 0;
@@ -38,7 +38,8 @@ static uint8_t	flag(char *arg)
 
 void			input_parse(int ac, char **av)
 {
-	static void	(*option[NFLAGS])(int*, char***) = {option_n, option_dump};
+	static void	(*option[NFLAGS])(int*, char***) = {option_n, option_dump,
+				option_verb};
 	char		*file_names[MAX_PLAYERS];
 	uint8_t		n;
 	uint8_t		f;
@@ -52,5 +53,7 @@ void			input_parse(int ac, char **av)
 		else
 			option_none(*av, file_names, &n);
 	}
+	if (!g_os.n_players)
+		option_help();
 	players_arrange(file_names, n);
 }

@@ -27,25 +27,29 @@
 
 # define COREWAR_EXEC_MAGIC	0xEA83F3
 
+# define REGISTER_STR		"r"
+# define DIRECT_STR			"%"
+# define INDIRECT_STR		""
+# define SEPARATOR_STR		", "
+
 /*
 ** ERRORS
 */
 
-# define SUC_GAME_OVER		0
+# define ERR_SYS			-1
+# define SUCC				0
 # define ERR_N_PLAYERS		1
 # define ERR_N_FLAG			2
 # define ERR_DUMP_FLAG		3
-# define ERR_READ_OPEN		4
+# define ERR_V_FLAG			4
 # define ERR_READ_MAGIC		5
 # define ERR_READ_PNAME		6
 # define ERR_READ_NONE		7
 # define ERR_READ_PSIZE		8
 # define ERR_READ_COMM		9
 # define ERR_READ_PCODE		10
-# define ERR_READ_CLOSE		11
-# define ERR_MEMORY			12
 
-# define N_MSG				13
+# define N_MSG				10
 
 /*
 ** ***********
@@ -55,7 +59,7 @@
 # define CF_SET(val)		proc->cf = (val) ? 0 : 1;
 # define IDX(idx)			((idx) & 0xFFF)
 
-# define NFLAGS				2
+# define NFLAGS				3
 
 # define EXT				".cor"
 # define EXT_LEN			4
@@ -78,6 +82,8 @@ void		input_parse(int ac, char **av);
 void		option_n(int *ac, char ***av);
 void		option_dump(int *ac, char ***av);
 void		option_none(char *arg, char **file_names, uint8_t *n);
+void		option_verb(int *ac, char ***av);
+void		option_help(void);
 
 /*
 ** PLAYERS READING *************************************************************
@@ -109,7 +115,7 @@ int32_t		mem_ref(uint32_t idx, uint8_t len);
 */
 
 void		instr_fetch(t_proc *proc);
-int			instr_exec(t_proc *proc);
+void		instr_exec(t_proc *proc);
 
 void		arg_dst(t_arg *arg, t_proc *proc);
 void		arg_src(t_arg *arg, t_proc *proc);
@@ -141,6 +147,33 @@ void		or(t_proc *proc);
 void		xor(t_proc *proc);
 
 /*
+** REPR ************************************************************************
+*/
+
+void		src_repr(t_arg *arg);
+void		dst_repr(t_arg *arg);
+
+void		live_repr(t_proc *proc);
+void		zjmp_repr(t_proc *proc);
+void		fork_repr(t_proc *proc);
+void		lfork_repr(t_proc *proc);
+void		aff_repr(t_proc *proc);
+
+void		st_repr(t_proc *proc);
+void		sti_repr(t_proc *proc);
+
+void		ld_repr(t_proc *proc);
+void		lld_repr(t_proc *proc);
+void		ldi_repr(t_proc *proc);
+void		lldi_repr(t_proc *proc);
+
+void		add_repr(t_proc *proc);
+void		sub_repr(t_proc *proc);
+void		and_repr(t_proc *proc);
+void		or_repr(t_proc *proc);
+void		xor_repr(t_proc *proc);
+
+/*
 ** PROCS ***********************************************************************
 */
 
@@ -148,10 +181,30 @@ t_proc		*proc_add(void);
 void		proc_zer(t_proc *proc);
 
 /*
+** BUFFER **********************************************************************
+*/
+
+void		buff_flush(void);
+void		buff_str(char *src);
+void		buff_number(int32_t n, uint8_t base);
+
+/*
+** UTILITY *********************************************************************
+*/
+
+void		nbr_recursion(char *s, uint32_t *i, uint32_t n, uint8_t base);
+int			is_number(char *str);
+
+/*
 ** OUTPUT **********************************************************************
 */
 
 void		dump(void);
+void		verb(t_proc *proc);
+void		verb_assembly(t_proc *proc);
+void		verb_check_1(void);
+void		verb_check_2(t_proc *proc);
+void		verb_check_3(void);
 
 /*
 ** EXIT ************************************************************************

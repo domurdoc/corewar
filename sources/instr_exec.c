@@ -21,7 +21,7 @@ static uint8_t	arg_init(t_arg *arg, uint8_t code, uint8_t type, t_proc *proc)
 	return (0);
 }
 
-int				instr_exec(t_proc *proc)
+void			instr_exec(t_proc *proc)
 {
 	uint8_t	acb;
 	uint8_t	err;
@@ -35,15 +35,14 @@ int				instr_exec(t_proc *proc)
 	else
 		acb = proc->ci.instr->acb;
 	err = 0;
-	i = 0;
-	while (i < proc->ci.instr->n_args)
-	{
+	i = -1;
+	while (++i < proc->ci.instr->n_args)
 		err |= arg_init(&proc->ci.args[i], (acb >> (0x6 - (i << 1))) & 0x3,
 			proc->ci.instr->types[i], proc);
-		i++;
-	}
 	if (!err)
+	{
 		proc->ci.instr->exec(proc);
+		verb_assembly(proc);
+	}
 	proc->pc = proc->pc_adv;
-	return (err);
 }

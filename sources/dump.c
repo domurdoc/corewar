@@ -4,18 +4,17 @@ void	dump(void)
 {
 	int	i;
 	int	j;
-	int	n;
 
-	i = -1;
-	while (++i < 64)
+	i = 0;
+	while (i < MEM_SIZE)
 	{
+		ft_printf("0x%04x : ", i);
 		j = -1;
-		n = 64 * i;
-		ft_printf("%#06x : ", n);
-		while (++j < 64)
+		while (++j < 32)
 		{
-			ft_printf("%02x ", g_os.mem[n + j]);
+			ft_printf("%02x ", g_os.mem[i + j]);
 		}
+		i += 32;
 		ft_printf("\n");
 	}
 }

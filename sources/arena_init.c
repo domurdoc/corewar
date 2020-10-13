@@ -10,7 +10,7 @@ void	arena_init(void)
 	while (i < g_os.n_players)
 	{
 		if (!(proc = proc_add()))
-			exit_(ERR_MEMORY, NULL);
+			exit_(ERR_SYS, NULL);
 		proc_zer(proc);
 		player = &g_os.players[i];
 		*(uint32_t*)proc->reg[0] = -(i + 1);

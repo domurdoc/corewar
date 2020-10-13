@@ -24,7 +24,9 @@ void		option_dump(int *ac, char ***av)
 
 	if (*ac < 2)
 		exit_(ERR_DUMP_FLAG, NULL);
-	n = ft_atoi(*(++*av));
+	if (!is_number(*(++*av)))
+		exit_(ERR_DUMP_FLAG, NULL);
+	n = ft_atoi(**av);
 	(*ac)--;
 	if (n < 0)
 		exit_(ERR_DUMP_FLAG, NULL);
@@ -37,4 +39,39 @@ void		option_none(char *arg, char **file_names, uint8_t *n)
 		exit_(ERR_N_PLAYERS, NULL);
 	file_names[(*n)++] = arg;
 	g_os.n_players++;
+}
+
+void		option_verb(int *ac, char ***av)
+{
+	int	n;
+
+	if (*ac < 2)
+		exit_(ERR_V_FLAG, NULL);
+	if (!is_number(*(++*av)))
+		exit_(ERR_V_FLAG, NULL);
+	n = ft_atoi(**av);
+	(*ac)--;
+	if (n < 1 || n > 5)
+		exit_(ERR_V_FLAG, NULL);
+	else if (n < 4)
+		g_os.verb |= 1 << (n - 1);
+	else
+		g_os.verb = n + 1;
+}
+
+void		option_help(void)
+{
+	int		fd;
+	char	*line;
+
+	if ((fd = open("./resources/help", O_RDONLY)) < 0)
+		exit_(ERR_SYS, "./resources/help");
+	while (ft_gnl(fd, &line) > 0)
+	{
+		ft_dprintf(STDERR_FILENO, "%s\n", line);
+		free(line);
+	}
+	if (close(fd) < 0)
+		exit_(ERR_SYS, NULL);
+	exit_(SUCC, NULL);
 }

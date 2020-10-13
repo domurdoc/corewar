@@ -11,6 +11,7 @@ t_proc	*proc_add(void)
 		free(new);
 		return (NULL);
 	}
+	new->id = ++g_os.p_ids;
 	return (new);
 }
 
