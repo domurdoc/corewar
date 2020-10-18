@@ -66,7 +66,6 @@
 
 extern t_os					g_os;
 extern t_dlst_cir			g_procs;
-extern t_instr				g_is[16];
 
 /*
 ** VM INIT *********************************************************************
@@ -201,7 +200,7 @@ int			is_number(char *str);
 
 void		dump(void);
 void		verb(t_proc *proc);
-void		verb_assembly(t_proc *proc);
+void		verb_assembly(t_proc *proc, uint8_t err);
 void		verb_check_1(void);
 void		verb_check_2(t_proc *proc);
 void		verb_check_3(void);

@@ -40,9 +40,7 @@ void			instr_exec(t_proc *proc)
 		err |= arg_init(&proc->ci.args[i], (acb >> (0x6 - (i << 1))) & 0x3,
 			proc->ci.instr->types[i], proc);
 	if (!err)
-	{
 		proc->ci.instr->exec(proc);
-		verb_assembly(proc);
-	}
+	verb_assembly(proc, err);
 	proc->pc = proc->pc_adv;
 }

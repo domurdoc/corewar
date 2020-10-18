@@ -6,7 +6,7 @@ void	live(t_proc *proc)
 	if (AR[0].val <= -1 && AR[0].val >= -g_os.n_players)
 	{
 		g_os.id = -AR[0].val;
-		if (!g_os.verb)
+		if (!g_os.verb && !g_os.dump)
 		{
 			buff_str("A process shows that player ");
 			buff_number(g_os.id, 10);
@@ -50,6 +50,6 @@ void	lfork(t_proc *proc)
 
 void	aff(t_proc *proc)
 {
-	if (!g_os.verb)
+	if (!g_os.verb && !g_os.dump)
 		(void)ft_printf("%c\n", AR[0].val);
 }

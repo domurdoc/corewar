@@ -82,6 +82,7 @@ typedef struct	s_os
 	t_player	players[MAX_PLAYERS];
 	uint32_t	p_ids;
 	uint8_t		verb;
+	uint8_t		dump;
 	t_buff		buff;
 }				t_os;
 

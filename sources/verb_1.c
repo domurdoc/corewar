@@ -55,19 +55,43 @@ static void	verb_padding(uint32_t s)
 	g_os.buff.n = 0;
 }
 
-void		verb_assembly(t_proc *proc)
+static void	verb_mem(uint32_t pc, uint32_t pc_adv)
 {
-	if (g_os.verb & 0x3)
+	uint8_t		n;
+
+	while (pc != pc_adv)
 	{
-		verb_proc_id(proc->id);
-		verb_translation(&proc->ci);
-		if (g_os.verb & 0x2)
+		n = mem_ref(pc, 1);
+		if (n <= 0xf)
+			buff_str("0");
+		buff_number(n, 16);
+		buff_str(" ");
+		pc = IDX(pc + 1);
+	}
+}
+
+void		verb_assembly(t_proc *proc, uint8_t err)
+{
+	if (g_os.verb & 0x7)
+	{
+		if (!err || (g_os.verb & 0x4))
 		{
-			verb_padding(40);
-			buff_number(proc->pc, 10);
-			verb_padding(20);
-			proc->ci.instr->repr(proc);
+			verb_proc_id(proc->id);
+			if (!err)
+				verb_translation(&proc->ci);
+			else
+				verb_mem(proc->pc, proc->pc_adv);
+			if (g_os.verb & 0x6)
+			{
+				verb_padding(40);
+				buff_number(proc->pc, 10);
+				if (!err)
+				{
+					verb_padding(20);
+					proc->ci.instr->repr(proc);
+				}
+			}
+			buff_str("\n");
 		}
-		buff_str("\n");
 	}
 }

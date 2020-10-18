@@ -27,6 +27,7 @@ void		vm_init(void)
 	g_os.n_players = 0;
 	g_os.p_ids = 0;
 	g_os.verb = 0;
+	g_os.dump = 0;
 	g_os.buff.i = 0;
 	g_os.buff.n = 0;
 	players_init();

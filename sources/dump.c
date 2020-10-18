@@ -6,15 +6,16 @@ void	dump(void)
 	int	j;
 
 	i = 0;
+	buff_flush();
 	while (i < MEM_SIZE)
 	{
 		ft_printf("0x%04x : ", i);
 		j = -1;
-		while (++j < 32)
+		while (++j < g_os.dump)
 		{
 			ft_printf("%02x ", g_os.mem[i + j]);
 		}
-		i += 32;
+		i += g_os.dump;
 		ft_printf("\n");
 	}
 }

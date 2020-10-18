@@ -1,26 +1,32 @@
 NAME
-	./corewar - the "arena" in which champions will be executed (virtual machine)
+	./corewar - the "arena" in which champions will be executed
+		(virtual machine)
 
 SYNOPSIS
 	./corewar [OPTION] [[-n number] champion1.cor] ...
 
 DESCRIPTION
 
-	-dump N
-		at the end of N of execution, dump the memory on standard output
-		and quit the game; N must be non-negative integer
-	
+	-dump SIZE CYCLE
+		suppress "live" and "aff" instructions output;
+		at the end of CYCLE executions, dump the memory (SIZE bytes per line) on
+		standard output and quit the game; SIZE must be either 32 or 64;
+		CYCLE must be a non-negative integer;
+
 	-v N
 		suppress "live" and "aff" instructions output; verbosity mode with
 		N equals:
-		1 - translate instructions into assembly language
-		2 - add description to mode 1
-		3 - show checkups
-		4 - (1 + 3) mode
-		5 - (2 + 3) mode
+		1 - show assembly instructions
+		2 - mode 1 + show pc and description
+		3 - mode 2 + show failed instructions
+		4 - show checkups
+		5 - (1 + 4) mode
+		6 - (2 + 4) mode
+		7 - (3 + 4) mode
 
-	-n number
-		set the number of the next player; must be [1..4] without repetition
+	-n NUMBER FILE
+		set the NUMBER of the next player from FILE; must be [1..4] without
+		repetition
 
 AUTHOR
 	Writen by domurdoc
