@@ -70,19 +70,13 @@ void		option_verb(int *ac, char ***av)
 	g_vm->verb |= 1 << (n - 1);
 }
 
-void		option_help(void)
+void		option_is(int *ac, char ***av)
 {
-	int		fd;
-	char	*line;
-
-	if ((fd = open("./resources/help", O_RDONLY)) < 0)
-		exit_(ERR_SYS, "./resources/help");
-	while (ft_gnl(fd, &line) > 0)
-	{
-		ft_dprintf(STDERR_FILENO, "%s\n", line);
-		free(line);
-	}
-	if (close(fd) < 0)
-		exit_(ERR_SYS, "./resources/help");
-	exit_(SUCC, NULL);
+	if (*ac < 2)
+		exit_(ERR_IS_FLAG, "usage: -is extended");
+	if (ft_strequ(*(++*av), "extended"))
+		g_vm->is_size = IS_SIZE_EXT;
+	else
+		exit_(ERR_IS_FLAG, "usage: -is extended");
+	(*ac)--;
 }
