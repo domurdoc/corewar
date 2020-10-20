@@ -50,6 +50,12 @@ void	lfork(t_proc *proc)
 
 void	aff(t_proc *proc)
 {
+	char	tmp[2];
+
 	if (!g_vm->verb && !g_vm->dump)
-		(void)ft_printf("%c\n", AR[0].val);
+	{
+		tmp[0] = AR[0].val;
+		tmp[1] = '\0';
+		buff_str(tmp);
+	}
 }

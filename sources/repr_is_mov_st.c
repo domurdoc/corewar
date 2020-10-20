@@ -14,9 +14,4 @@ void	sti_repr(t_proc *proc)
 	src_repr(&AR[0]);
 	buff_str(" to ");
 	buff_number(dst_ind((AR[1].val + AR[2].val) % IDX_MOD, proc), 10);
-	buff_str(" (pc + (");
-	src_repr(&AR[1]);
-	buff_str(" + ");
-	src_repr(&AR[2]);
-	buff_str(") % IDX_MOD");
 }

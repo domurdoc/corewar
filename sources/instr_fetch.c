@@ -40,7 +40,7 @@ static t_instr	g_is[IS_SIZE_EXT] =
 		2, 0, 1, aff, aff_repr},
 	{"mul", 0, 3, {SRC | T_REG, SRC | T_REG, T_REG},
 		15, 0, 1, mul, mul_repr},
-	{"div_", 0, 3, {SRC | T_REG, SRC | T_REG, T_REG},
+	{"div", 0, 3, {SRC | T_REG, SRC | T_REG, T_REG},
 		20, 0, 1, div_, div_repr},
 	{"lsh", 0, 3, {SRC | T_REG, SRC | T_REG, T_REG},
 		6, 0, 1, lsh, lsh_repr},
