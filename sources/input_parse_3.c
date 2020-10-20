@@ -1,6 +1,6 @@
 #include "corewar.h"
 
-char	g_help[] = "NAME\n\
+static char	g_help[] = "NAME\n\
 \t./corewar - the \"arena\" in which champions will be executed\n\
 \t\t(virtual machine)\n\
 \n\
