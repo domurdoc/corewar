@@ -12,7 +12,7 @@ static uint8_t	arg_init(t_arg *arg, uint8_t code, uint8_t type, t_proc *proc)
 	proc->pc_adv = IDX(proc->pc_adv + arg->val);
 	if ((types[code] & type) == 0)
 		return (1);
-	if (code == REG_CODE && (g_os.mem[arg->idx] - 1 >= REG_NUMBER))
+	if (code == REG_CODE && ((uint8_t)(g_vm->mem[arg->idx] - 1) >= REG_NUMBER))
 		return (1);
 	if (type & SRC)
 		arg_src(arg, proc);
@@ -29,7 +29,7 @@ void			instr_exec(t_proc *proc)
 
 	if (!proc->ci.instr->acb)
 	{
-		acb = g_os.mem[proc->pc_adv++];
+		acb = g_vm->mem[proc->pc_adv++];
 		proc->pc_adv = IDX(proc->pc_adv);
 	}
 	else

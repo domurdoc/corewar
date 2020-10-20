@@ -8,7 +8,7 @@ static void	verb_proc_id(uint32_t id)
 
 	i = 0;
 	j = 0;
-	g_os.buff.n = 0;
+	g_vm->buff.n = 0;
 	buff_str("P");
 	nbr_recursion(temp, &i, id, 10);
 	temp[i] = '\0';
@@ -49,10 +49,10 @@ static void	verb_padding(uint32_t s)
 	uint32_t	pad;
 
 	i = 0;
-	pad = s - g_os.buff.n;
+	pad = s - g_vm->buff.n;
 	while (i++ < pad)
 		buff_str(" ");
-	g_os.buff.n = 0;
+	g_vm->buff.n = 0;
 }
 
 static void	verb_mem(uint32_t pc, uint32_t pc_adv)
@@ -72,16 +72,16 @@ static void	verb_mem(uint32_t pc, uint32_t pc_adv)
 
 void		verb_assembly(t_proc *proc, uint8_t err)
 {
-	if (g_os.verb & 0x7)
+	if (g_vm->verb & 0x7)
 	{
-		if (!err || (g_os.verb & 0x4))
+		if (!err || (g_vm->verb & 0x4))
 		{
 			verb_proc_id(proc->id);
 			if (!err)
 				verb_translation(&proc->ci);
 			else
 				verb_mem(proc->pc, proc->pc_adv);
-			if (g_os.verb & 0x6)
+			if (g_vm->verb & 0x6)
 			{
 				verb_padding(40);
 				buff_number(proc->pc, 10);

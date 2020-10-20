@@ -6,12 +6,12 @@ t_proc	*proc_add(void)
 
 	if (!(new = malloc(sizeof(t_proc))))
 		return (NULL);
-	if (dlst_cir_push(&g_procs, new))
+	if (dlst_cir_push(&g_vm->procs, new))
 	{
 		free(new);
 		return (NULL);
 	}
-	new->id = ++g_os.p_ids;
+	new->id = ++g_vm->p_ids;
 	return (new);
 }
 

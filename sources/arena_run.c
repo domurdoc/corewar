@@ -6,8 +6,8 @@ static void	do_procs(void)
 	t_dlst		*ptr;
 	uint32_t	i;
 
-	i = g_procs.len;
-	ptr = g_procs.cur;
+	i = g_vm->procs.len;
+	ptr = g_vm->procs.cur;
 	while (i--)
 	{
 		proc = ptr->data;
@@ -22,8 +22,10 @@ static void	do_procs(void)
 static void	game_over(void)
 {
 	buff_flush();
-	ft_printf("Player %d (%s) won\n", g_os.id,
-		g_os.players[g_os.id - 1].prog_name);
+	ft_printf("Player %d (%s) won\n", g_vm->id,
+		g_vm->players[g_vm->id - 1].prog_name);
+	if (g_vm->dump)
+		dump();
 	exit_(SUCC, NULL);
 }
 
@@ -33,17 +35,17 @@ static void	check_procs(void)
 	uint32_t	i;
 
 	i = 0;
-	while (i < g_procs.len)
+	while (i < g_vm->procs.len)
 	{
-		proc = g_procs.cur->data;
-		if (g_os.cycles_passed - proc->lc >= g_os.ctd)
+		proc = g_vm->procs.cur->data;
+		if (g_vm->cycles_passed - proc->lc >= g_vm->ctd)
 		{
 			verb_check_2(proc);
-			free(dlst_cir_pop(&g_procs));
+			free(dlst_cir_pop(&g_vm->procs));
 		}
 		else
 		{
-			g_procs.cur = g_procs.cur->next;
+			g_vm->procs.cur = g_vm->procs.cur->next;
 			i++;
 		}
 	}
@@ -51,29 +53,29 @@ static void	check_procs(void)
 
 static void	do_check(void)
 {
-	if (g_os.cycles_to_check == 0 || g_procs.len == 0)
+	if (g_vm->cycles_to_check == 0 || g_vm->procs.len == 0)
 		game_over();
-	else if (g_os.cycles_to_check-- == 1)
+	else if (g_vm->cycles_to_check-- == 1)
 	{
 		verb_check_1();
 		check_procs();
 		verb_check_3();
-		g_os.chk_counter++;
-		if (g_os.live_counter >= NBR_LIVE || g_os.chk_counter > MAX_CHECKS)
+		g_vm->chk_counter++;
+		if (g_vm->live_counter >= NBR_LIVE || g_vm->chk_counter > MAX_CHECKS)
 		{
-			g_os.ctd = CYCLE_DELTA >= g_os.ctd ? 0 : g_os.ctd - CYCLE_DELTA;
-			g_os.chk_counter = 0;
+			g_vm->ctd = CYCLE_DELTA >= g_vm->ctd ? 0 : g_vm->ctd - CYCLE_DELTA;
+			g_vm->chk_counter = 0;
 		}
-		g_os.cycles_to_check = g_os.ctd;
-		g_os.live_counter = 0;
+		g_vm->cycles_to_check = g_vm->ctd;
+		g_vm->live_counter = 0;
 	}
 }
 
 void		arena_run(void)
 {
-	while (g_os.cycles_passed <= g_os.cycles_to_dump)
+	while (g_vm->cycles_passed <= g_vm->cycles_to_dump)
 	{
-		g_os.cycles_passed++;
+		g_vm->cycles_passed++;
 		do_procs();
 		do_check();
 	}

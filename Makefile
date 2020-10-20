@@ -20,10 +20,12 @@ SRC_NAMES = arena_init.c\
 	exit.c\
 	input_parse_1.c\
 	input_parse_2.c\
+	input_parse_3.c\
 	instr_exec.c\
 	instr_fetch.c\
 	is_arith.c\
 	is_control.c\
+	is_ext.c\
 	is_mov_ld.c\
 	is_mov_st.c\
 	mem_1.c\
@@ -33,6 +35,7 @@ SRC_NAMES = arena_init.c\
 	proc.c\
 	repr_is_arith.c\
 	repr_is_control.c\
+	repr_is_ext.c\
 	repr_is_mov_ld.c\
 	repr_is_mov_st.c\
 	repr.c\

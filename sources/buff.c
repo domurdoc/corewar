@@ -2,19 +2,19 @@
 
 void	buff_flush(void)
 {
-	if (write(STDOUT_FILENO, g_os.buff.s, g_os.buff.i) < 0)
+	if (write(STDOUT_FILENO, g_vm->buff.s, g_vm->buff.i) < 0)
 		exit_(ERR_SYS, NULL);
-	g_os.buff.i = 0;
+	g_vm->buff.i = 0;
 }
 
 void	buff_str(char *src)
 {
 	while (*src)
 	{
-		if (g_os.buff.i == BUFF_SIZE)
+		if (g_vm->buff.i == BUFF_SIZE)
 			buff_flush();
-		g_os.buff.s[g_os.buff.i++] = *src++;
-		g_os.buff.n++;
+		g_vm->buff.s[g_vm->buff.i++] = *src++;
+		g_vm->buff.n++;
 	}
 }
 

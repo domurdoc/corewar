@@ -70,6 +70,7 @@ struct			s_instr
 
 typedef struct	s_os
 {
+	t_dlst_cir	procs;
 	uint8_t		mem[MEM_SIZE];
 	uint64_t	cycles_passed;
 	uint64_t	ctd;
@@ -83,7 +84,8 @@ typedef struct	s_os
 	uint32_t	p_ids;
 	uint8_t		verb;
 	uint8_t		dump;
+	uint8_t		is_size;
 	t_buff		buff;
-}				t_os;
+}				t_vm;
 
 #endif

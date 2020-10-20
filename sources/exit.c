@@ -11,6 +11,7 @@ static char	*g_msg[N_MSG] = {
 	"Invalid Binary: program size incorrect",
 	"Invalid Binary: comment incorrect",
 	"Invalid Binary: program code size incorrect",
+	"Input Error: invalid use of \"-is\" option"
 };
 
 void	exit_(int code, char *str)
@@ -23,6 +24,6 @@ void	exit_(int code, char *str)
 		if (str)
 			ft_dprintf(STDERR_FILENO, "(%s)\n", str);
 	}
-	dlst_cir_del(&g_procs, free);
+	dlst_cir_del(&g_vm->procs, free);
 	exit(code ? EXIT_FAILURE : EXIT_SUCCESS);
 }

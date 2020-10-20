@@ -7,6 +7,9 @@ SYNOPSIS
 
 DESCRIPTION
 
+	(without .cor-files)
+		show this man page and quit
+
 	-dump SIZE CYCLE
 		suppress "live" and "aff" instructions output;
 		at the end of CYCLE executions, dump the memory (SIZE bytes per line) on
@@ -27,6 +30,9 @@ DESCRIPTION
 	-n NUMBER FILE
 		set the NUMBER of the next player from FILE; must be [1..4] without
 		repetition
+
+	-is extended
+		use extended set of instructions (mul, div, lsh, rsh, rshh)
 
 AUTHOR
 	Writen by domurdoc

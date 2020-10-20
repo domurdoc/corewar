@@ -49,7 +49,9 @@
 # define ERR_READ_COMM		9
 # define ERR_READ_PCODE		10
 
-# define N_MSG				10
+# define ERR_IS_FLAG		11
+
+# define N_MSG				11
 
 /*
 ** ***********
@@ -59,19 +61,21 @@
 # define CF_SET(val)		proc->cf = (val) ? 0 : 1;
 # define IDX(idx)			((idx) & 0xFFF)
 
-# define NFLAGS				3
+# define NFLAGS				4
 
 # define EXT				".cor"
 # define EXT_LEN			4
 
-extern t_os					g_os;
-extern t_dlst_cir			g_procs;
+# define IS_SIZE_STD		16
+# define IS_SIZE_EXT		21
+
+extern t_vm					*g_vm;
 
 /*
 ** VM INIT *********************************************************************
 */
 
-void		vm_init(void);
+void		vm_init(t_vm *vm);
 
 /*
 ** INPUT PARSING ***************************************************************
@@ -83,6 +87,7 @@ void		option_dump(int *ac, char ***av);
 void		option_none(char *arg, char **file_names, uint8_t *n);
 void		option_verb(int *ac, char ***av);
 void		option_help(void);
+void		option_is(int *ac, char ***av);
 
 /*
 ** PLAYERS READING *************************************************************
@@ -146,6 +151,16 @@ void		or(t_proc *proc);
 void		xor(t_proc *proc);
 
 /*
+** EXT
+*/
+
+void		mul(t_proc *proc);
+void		div_(t_proc *proc);
+void		lsh(t_proc *proc);
+void		rsh(t_proc *proc);
+void		rshh(t_proc *proc);
+
+/*
 ** REPR ************************************************************************
 */
 
@@ -171,6 +186,15 @@ void		sub_repr(t_proc *proc);
 void		and_repr(t_proc *proc);
 void		or_repr(t_proc *proc);
 void		xor_repr(t_proc *proc);
+
+/*
+** EXT
+*/
+
+void		mul_repr(t_proc *proc);
+void		div_repr(t_proc *proc);
+void		lsh_repr(t_proc *proc);
+void		rsh_repr(t_proc *proc);
 
 /*
 ** PROCS ***********************************************************************

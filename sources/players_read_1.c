@@ -40,9 +40,9 @@ void		players_read(void)
 	uint8_t	i;
 
 	i = 0;
-	while (i < g_os.n_players)
+	while (i < g_vm->n_players)
 	{
-		player_read(&g_os.players[i]);
+		player_read(&g_vm->players[i]);
 		i++;
 	}
 }

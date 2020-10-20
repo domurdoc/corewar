@@ -9,21 +9,21 @@ static void		players_arrange(char **fn, uint8_t n)
 	j = 0;
 	while (i < n)
 	{
-		while (g_os.players[j].file_name)
+		while (g_vm->players[j].file_name)
 			j++;
-		g_os.players[j].file_name = fn[i++];
+		g_vm->players[j].file_name = fn[i++];
 	}
 	i = 0;
-	while (i < g_os.n_players)
+	while (i < g_vm->n_players)
 	{
-		if (!g_os.players[i++].file_name)
+		if (!g_vm->players[i++].file_name)
 			exit_(ERR_N_FLAG, "players numbers must be contiguous");
 	}
 }
 
 static uint8_t	flag(char *arg)
 {
-	static char	*flags[NFLAGS] = {"-n", "-dump", "-v"};
+	static char	*flags[NFLAGS] = {"-n", "-dump", "-v", "-is"};
 	uint8_t		i;
 
 	i = 0;
@@ -39,7 +39,7 @@ static uint8_t	flag(char *arg)
 void			input_parse(int ac, char **av)
 {
 	static void	(*option[NFLAGS])(int*, char***) = {option_n, option_dump,
-				option_verb};
+				option_verb, option_is};
 	char		*file_names[MAX_PLAYERS];
 	uint8_t		n;
 	uint8_t		f;
@@ -53,7 +53,7 @@ void			input_parse(int ac, char **av)
 		else
 			option_none(*av, file_names, &n);
 	}
-	if (!g_os.n_players)
+	if (!g_vm->n_players)
 		option_help();
 	players_arrange(file_names, n);
 }

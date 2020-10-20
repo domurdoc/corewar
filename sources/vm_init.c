@@ -7,29 +7,33 @@ static void	players_init(void)
 	i = 0;
 	while (i < MAX_PLAYERS)
 	{
-		g_os.players[i].file_name = NULL;
-		g_os.players[i].prog_name[PROG_NAME_LENGTH] = '\0';
-		g_os.players[i].comment[COMMENT_LENGTH] = '\0';
+		g_vm->players[i].file_name = NULL;
+		g_vm->players[i].prog_name[PROG_NAME_LENGTH] = '\0';
+		g_vm->players[i].comment[COMMENT_LENGTH] = '\0';
 		i++;
 	}
 }
 
-void		vm_init(void)
+t_vm	*g_vm;
+
+void		vm_init(t_vm *vm)
 {
-	(void)ft_memset(g_os.mem, 0, MEM_SIZE);
-	g_os.cycles_passed = 0;
-	g_os.ctd = CYCLE_TO_DIE;
-	g_os.cycles_to_check = CYCLE_TO_DIE;
-	g_os.cycles_to_dump = -1;
-	g_os.id = 0;
-	g_os.live_counter = 0;
-	g_os.chk_counter = 0;
-	g_os.n_players = 0;
-	g_os.p_ids = 0;
-	g_os.verb = 0;
-	g_os.dump = 0;
-	g_os.buff.i = 0;
-	g_os.buff.n = 0;
+	g_vm = vm;
+	(void)ft_memset(g_vm->mem, 0, MEM_SIZE);
+	g_vm->cycles_passed = 0;
+	g_vm->ctd = CYCLE_TO_DIE;
+	g_vm->cycles_to_check = CYCLE_TO_DIE;
+	g_vm->cycles_to_dump = -1;
+	g_vm->id = 0;
+	g_vm->live_counter = 0;
+	g_vm->chk_counter = 0;
+	g_vm->n_players = 0;
+	g_vm->p_ids = 0;
+	g_vm->verb = 0;
+	g_vm->dump = 0;
+	g_vm->buff.i = 0;
+	g_vm->buff.n = 0;
+	g_vm->is_size = IS_SIZE_STD;
 	players_init();
-	dlst_cir_init(&g_procs);
+	dlst_cir_init(&g_vm->procs);
 }

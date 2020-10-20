@@ -1,6 +1,6 @@
 #include "corewar.h"
 
-static t_instr	g_is[16] =
+static t_instr	g_is[IS_SIZE_EXT] =
 {
 	{"live", DIR_CODE << 6, 1, {SRC | T_DIR},
 		10, 0, 1, live, live_repr},
@@ -37,16 +37,26 @@ static t_instr	g_is[16] =
 	{"lfork", DIR_CODE << 6, 1, {SRC | T_DIR},
 		1000, 1, 1, lfork, lfork_repr},
 	{"aff", 0, 1, {SRC | T_REG},
-		2, 0, 1, aff, aff_repr}
+		2, 0, 1, aff, aff_repr},
+	{"mul", 0, 3, {SRC | T_REG, SRC | T_REG, T_REG},
+		15, 0, 1, mul, mul_repr},
+	{"div_", 0, 3, {SRC | T_REG, SRC | T_REG, T_REG},
+		20, 0, 1, div_, div_repr},
+	{"lsh", 0, 3, {SRC | T_REG, SRC | T_REG, T_REG},
+		6, 0, 1, lsh, lsh_repr},
+	{"rsh", 0, 3, {SRC | T_REG, SRC | T_REG, T_REG},
+		6, 0, 1, rsh, rsh_repr},
+	{"rshh", 0, 3, {SRC | T_REG, SRC | T_REG, T_REG},
+		6, 0, 1, rshh, rsh_repr},
 };
 
 void	instr_fetch(t_proc *proc)
 {
 	uint8_t	instr_idx;
 
-	instr_idx = g_os.mem[proc->pc_adv++] - 1;
+	instr_idx = g_vm->mem[proc->pc_adv++] - 1;
 	proc->pc_adv = IDX(proc->pc_adv);
-	if (instr_idx <= 0xF)
+	if (instr_idx < g_vm->is_size)
 	{
 		proc->ci.instr = &g_is[instr_idx];
 		proc->ci.cycles_to_exec = proc->ci.instr->n_ccls;
