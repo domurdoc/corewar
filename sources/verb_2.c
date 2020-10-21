@@ -6,13 +6,12 @@ void	verb_check_1(void)
 	{
 		buff_str("\nCHECKPOINT: cycle ");
 		buff_number(g_vm->cycles_passed, 10);
-		buff_str(", ");
-		buff_number(g_vm->procs.len, 10);
-		buff_str(" processes\n");
-		buff_str("CTD = ");
+		buff_str(", ctd ");
 		buff_number(g_vm->ctd, 10);
-		buff_str("; LC = ");
+		buff_str(", lc ");
 		buff_number(g_vm->live_counter, 10);
+		buff_str(", procs ");
+		buff_number(g_vm->procs.len, 10);
 		buff_str("\nKILLED PROCESSES:\n");
 		g_vm->buff.n = 0;
 	}
