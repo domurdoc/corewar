@@ -27,11 +27,3 @@ int				good_size(uint8_t *buf)
 {
 	return (big_little_uint32(buf) <= CHAMP_MAX_SIZE);
 }
-
-int				good_str(uint8_t *buf)
-{
-	while (*buf)
-		if (!ft_isprint(*buf++))
-			return (0);
-	return (1);
-}

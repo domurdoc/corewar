@@ -17,13 +17,13 @@ static void	player_read(t_player *p)
 		exit_(ERR_SYS, p->file_name);
 	if (!field_read(fd, (uint8_t*)&p->magic, sizeof(uint32_t), good_magic))
 		exit_(ERR_READ_MAGIC, p->file_name);
-	if (!field_read(fd, (uint8_t*)p->prog_name, PROG_NAME_LENGTH, good_str))
+	if (!field_read(fd, (uint8_t*)p->prog_name, PROG_NAME_LENGTH, NULL))
 		exit_(ERR_READ_PNAME, p->file_name);
 	if (!field_read(fd, (uint8_t*)&p->magic, sizeof(uint32_t), good_none))
 		exit_(ERR_READ_NONE, p->file_name);
 	if (!field_read(fd, (uint8_t*)&p->prog_size, sizeof(uint32_t), good_size))
 		exit_(ERR_READ_PSIZE, p->file_name);
-	if (!field_read(fd, (uint8_t*)p->comment, COMMENT_LENGTH, good_str))
+	if (!field_read(fd, (uint8_t*)p->comment, COMMENT_LENGTH, NULL))
 		exit_(ERR_READ_COMM, p->file_name);
 	if (!field_read(fd, (uint8_t*)&p->magic, sizeof(uint32_t), good_none))
 		exit_(ERR_READ_NONE, p->file_name);

@@ -97,7 +97,6 @@ void		players_read(void);
 int			good_magic(uint8_t *buf);
 int			good_none(uint8_t *buf);
 int			good_size(uint8_t *buf);
-int			good_str(uint8_t *buf);
 
 /*
 ** ARENA ***********************************************************************
