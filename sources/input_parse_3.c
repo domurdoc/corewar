@@ -18,9 +18,9 @@ DESCRIPTION\n\
 \t\tstandard output and quit the game; SIZE must be either 32 or 64;\n\
 \t\tCYCLE must be a non-negative integer;\n\
 \n\
-\t-v N\n\
+\t-v MODE\n\
 \t\tsuppress \"live\" and \"aff\" instructions output; verbosity mode with\n\
-\t\tN equals:\n\
+\t\tMODE equals:\n\
 \t\t1 - show assembly instructions\n\
 \t\t2 - mode 1 + show pc and description\n\
 \t\t3 - mode 2 + show failed instructions\n\
@@ -37,7 +37,7 @@ DESCRIPTION\n\
 \t\tuse extended set of instructions (mul, div, lsh, rsh, rshh)\n\
 \n\
 AUTHOR\n\
-\tWriten by domurdoc";
+\tWritten by domurdoc";
 
 void		option_help(void)
 {

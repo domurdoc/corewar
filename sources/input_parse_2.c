@@ -54,13 +54,13 @@ void		option_verb(int *ac, char ***av)
 	int	n;
 
 	if (*ac < 2)
-		exit_(ERR_V_FLAG, "1 parameter required: N");
+		exit_(ERR_V_FLAG, "1 parameter required: MODE");
 	if (!is_number(*(++*av)))
-		exit_(ERR_V_FLAG, "N must be [1..7]");
+		exit_(ERR_V_FLAG, "MODE must be [1..7]");
 	n = ft_atoi(**av);
 	(*ac)--;
 	if (n < 1 || n > 7)
-		exit_(ERR_V_FLAG, "N must be [1..7]");
+		exit_(ERR_V_FLAG, "MODE must be [1..7]");
 	g_vm->verb = 0;
 	if (n > 4)
 	{
